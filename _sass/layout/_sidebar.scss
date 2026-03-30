@@ -164,7 +164,7 @@
   font-family: $sans-serif;
   z-index: 10;
   position: relative;
-  cursor: pointer;
+  cursor: default;
 
   li:last-child {
     a {
@@ -176,71 +176,27 @@
     display: block;
   }
 
-  button {
-    margin-bottom: 0;
-
-    @include breakpoint($large) {
-      display: none;
-    }
-  }
 }
 
 .author__urls {
-  display: none;
-  position: absolute;
-  right: 0;
-  margin-top: 15px;
-  padding: 10px;
+  display: block;
+  position: relative;
+  right: auto;
+  margin-top: 0;
+  padding: 0;
   list-style-type: none;
-  border: 1px solid var(--global-border-color);
-  border-radius: $border-radius;
-  background: var(--global-bg-color);
-  z-index: -1;
-  box-shadow: 0 0 10px rgba(#000, 0.25);
+  border: 0;
+  background: transparent;
+  z-index: auto;
+  box-shadow: none;
   cursor: default;
 
-  @include breakpoint($large) {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
   &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -11px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: var(--global-border-color) transparent;
-    z-index: 0;
-
-    @include breakpoint($large) {
-      display: none;
-    }
+    display: none;
   }
 
   &:after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: #fff transparent;
-    z-index: 1;
-
-    @include breakpoint($large) {
-      display: none;
-    }
+    display: none;
   }
 
   li {
@@ -260,5 +216,29 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.author__urls--primary {
+  margin-bottom: 0.5rem;
+
+  li a {
+    font-weight: 600;
+  }
+}
+
+.author__urls-secondary {
+  margin-top: 0.4rem;
+
+  summary {
+    margin-bottom: 0.2rem;
+    font-size: $type-size-6;
+    color: var(--global-text-color-light);
+    cursor: pointer;
+  }
+
+  .author__urls {
+    margin-top: 0.25rem;
+    padding-left: 0.25rem;
   }
 }
