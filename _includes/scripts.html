@@ -1,3 +1,7 @@
+{%- comment -%}
+Keep a single JavaScript entrypoint. `type="module"` is supported on GitHub Pages
+because it serves static assets over HTTPS from modern browsers.
+{%- endcomment -%}
 <script type="module" src="{{ base_path }}/assets/js/main.min.js"></script>
 
 {% include analytics.html %}
