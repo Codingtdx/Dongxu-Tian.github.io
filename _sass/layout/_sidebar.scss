@@ -262,3 +262,35 @@
     }
   }
 }
+
+.author__meta {
+  margin: 0.2rem 0;
+  color: var(--global-text-color-light);
+
+  i {
+    margin-right: 0.3rem;
+  }
+}
+
+.author__links-title {
+  margin: 1rem 0 0.5rem;
+  font-size: $type-size-6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--global-text-color-light);
+}
+
+.author__urls {
+  display: block;
+  position: static;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+
+  &:before,
+  &:after {
+    display: none;
+  }
+}

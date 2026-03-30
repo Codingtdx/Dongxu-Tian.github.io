@@ -120,13 +120,7 @@ $(document).ready(function () {
   // FitVids init
   fitvids();
 
-  // Follow menu drop down
-  $(".author__urls-wrapper button").on("click", function () {
-    $(".author__urls").fadeToggle("fast", function () { });
-    $(".author__urls-wrapper button").toggleClass("open");
-  });
-
-  // Restore the follow menu if toggled on a window resize
+  // Keep sidebar links visible on desktop after a resize
   jQuery(window).on('resize', function () {
     if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
       $(".author__urls").css('display', 'block')
