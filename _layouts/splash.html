@@ -15,6 +15,46 @@ layout: default
     {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date: "%B %d, %Y" }}">{% endif %}
     {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
 
+    {% if page.intro_tagline or page.intro_keywords or page.intro_affiliations or page.intro_actions %}
+      <section class="splash__intro" itemprop="about">
+        {% if page.title %}
+          <h1 class="splash__title">{{ page.title }}</h1>
+        {% endif %}
+
+        {% if page.intro_tagline %}
+          <p class="splash__tagline">{{ page.intro_tagline }}</p>
+        {% endif %}
+
+        {% if page.intro_keywords %}
+          <p class="splash__keywords">
+            <strong>Research keywords:</strong>
+            {{ page.intro_keywords | join: " · " }}
+          </p>
+        {% endif %}
+
+        {% if page.intro_affiliations %}
+          <ul class="splash__affiliations">
+            {% for affiliation in page.intro_affiliations %}
+              <li>{{ affiliation }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if page.intro_actions %}
+          <div class="splash__actions">
+            {% for action in page.intro_actions %}
+              {% if action.url contains "://" or action.url contains "mailto:" %}
+                {% assign action_url = action.url %}
+              {% else %}
+                {% assign action_url = action.url | prepend: base_path %}
+              {% endif %}
+              <a href="{{ action_url }}" class="btn btn--large {% if action.class %}{{ action.class }}{% endif %}">{{ action.label }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+
     <section class="page__content" itemprop="text">
       {{ content }}
     </section>

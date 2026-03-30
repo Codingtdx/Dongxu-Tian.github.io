@@ -399,3 +399,98 @@
   font-size: $type-size-6;
   text-transform: uppercase;
 }
+
+/*
+   Splash intro
+   ========================================================================== */
+
+.splash {
+  .page__content {
+    margin-top: 1.5rem;
+  }
+}
+
+.splash__intro {
+  max-width: 52rem;
+  margin: 0 auto 1.5rem;
+  padding: 0.5rem 0 0.75rem;
+}
+
+.splash__title {
+  margin: 0 0 0.5rem;
+  font-size: $type-size-2;
+  line-height: 1.08;
+
+  @include breakpoint($small) {
+    font-size: $type-size-1;
+  }
+}
+
+.splash__tagline {
+  margin: 0 0 0.65rem;
+  font-size: $type-size-4;
+  line-height: 1.45;
+}
+
+.splash__keywords {
+  margin: 0 0 0.5rem;
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+}
+
+.splash__affiliations {
+  margin: 0 0 0.9rem;
+  padding-left: 1.1rem;
+
+  li {
+    margin-bottom: 0.2rem;
+    font-size: $type-size-6;
+  }
+}
+
+.splash__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .btn {
+    margin-bottom: 0;
+    font-size: $type-size-6;
+  }
+
+  .btn--inverse {
+    border: 1px solid var(--global-border-color) !important;
+  }
+}
+
+@include breakpoint(max-width $small) {
+  #main {
+    margin-top: 1.2em;
+  }
+
+  .splash__intro {
+    padding-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .splash__title {
+    font-size: $type-size-3;
+  }
+
+  .splash__tagline {
+    font-size: $type-size-5;
+    margin-bottom: 0.5rem;
+  }
+
+  .splash__affiliations {
+    margin-bottom: 0.7rem;
+
+    li {
+      margin-bottom: 0.15rem;
+    }
+  }
+
+  .feature__wrapper {
+    margin-bottom: 1.25rem;
+  }
+}
