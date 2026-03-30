@@ -36,7 +36,8 @@
 
 .page__title {
   margin-top: 0;
-  line-height: 1;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 
   & + .page__meta {
     margin-top: -0.5em;
@@ -49,19 +50,43 @@
 }
 
 .page__content {
+  max-width: 72ch;
+
+  > * + * {
+    margin-top: 1rem;
+  }
 
   h2 {
-    padding-bottom: 0.5em;
+    margin-top: 2.2rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.45em;
+    font-size: clamp(1.45rem, 1.2rem + 0.9vw, 1.9rem);
+    line-height: 1.25;
     border-bottom: 1px solid var(--global-border-color);
+  }
+
+  h3 {
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.45rem);
+    line-height: 1.35;
+  }
+
+  h4 {
+    margin-top: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+    line-height: 1.4;
   }
 
   p, li, dl {
     font-size: 1em;
+    line-height: 1.8;
   }
 
   /* paragraph indents */
   p {
-    margin: 0 0 $indent-var;
+    margin: 0 0 1.2rem;
 
     /* sibling indentation*/
     @if $paragraph-indent == true {
@@ -74,6 +99,8 @@
 
   a {
     text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.12em;
 
     &:hover {
       text-decoration: underline;

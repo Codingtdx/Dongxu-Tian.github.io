@@ -8,6 +8,24 @@
    sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
  */
 
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+/* Shared token names. Theme files provide token values for light/dark modes. */
+:root {
+    --color-primary                      : #52adc8;
+    --color-primary-strong               : #2f7f93;
+    --gray-100                           : #f5f7f8;
+    --gray-200                           : #e5e8ea;
+    --gray-500                           : #7a8288;
+    --gray-700                           : #47515a;
+    --radius-sm                          : 4px;
+    --radius-md                          : 8px;
+    --shadow-sm                          : 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md                          : 0 8px 20px rgba(0, 0, 0, 0.1);
+    --section-spacing                    : clamp(1.5rem, 1.2rem + 1vw, 2.5rem);
+}
+
 @import
     "vendor/breakpoint/breakpoint",
 
