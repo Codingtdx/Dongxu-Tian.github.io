@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="{{meta.description}}">
+  <meta property="og:title" content="{{meta.title}}">
+  <meta property="og:description" content="{{meta.socialDescription}}">
+  <meta property="og:type" content="website">
+  <title>{{meta.title}}</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./renderer.js" defer></script>
+  <script src="./content.js" defer></script>
+  <script src="./app.js" defer></script>
+  <script type="application/ld+json">{{personJSON}}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">{{t.skip}}</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="#top" aria-label="{{meta.homeLabel}}"><span data-profile="name">{{meta.name}}</span><span aria-hidden="true">.</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#research" data-i18n="navResearch">{{t.navResearch}}</a><a href="#publications" data-i18n="navPapers">{{t.navPapers}}</a><a href="#about" data-i18n="navAbout">{{t.navAbout}}</a><a href="#contact" data-i18n="navContact">{{t.navContact}}</a></nav>
+    <div class="header-actions"><button id="language-toggle" class="language-toggle" data-enhancement hidden aria-label="Switch to Chinese">中文</button><button class="menu-toggle" id="menu-toggle" data-enhancement hidden aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button></div>
+  </div><nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="#research" data-i18n="navResearch">{{t.navResearch}}</a><a href="#publications" data-i18n="navPapers">{{t.navPapers}}</a><a href="#about" data-i18n="navAbout">{{t.navAbout}}</a><a href="#contact" data-i18n="navContact">{{t.navContact}}</a></nav><div class="header-progress" aria-hidden="true"></div></header>
+  <noscript><nav class="fallback-nav page-width" aria-label="Section navigation"><a href="#research">{{t.navResearch}}</a><a href="#publications">{{t.navPapers}}</a><a href="#education">{{t.navEducation}}</a><a href="#contact">{{t.navContact}}</a></nav></noscript>
+  <main id="main" tabindex="-1">
+    <section class="hero hero--typographic" id="top" tabindex="-1" aria-labelledby="hero-heading">
+      <div class="hero-light" aria-hidden="true"><div class="hero-light-wash"></div></div>
+      <div class="hero-content page-width"><div class="hero-copy reveal">
+        <h1 id="hero-heading" data-i18n="heroStatement">{{t.heroStatement}}</h1>
+        <a class="hero-cta" href="#research"><span data-i18n="explore">{{t.explore}}</span><img src="./assets/arrow-right.svg" width="22" height="22" alt="" aria-hidden="true"></a>
+      </div></div>
+      <a class="scroll-hint" href="#research" aria-label="{{t.scrollHint}}" data-i18n-aria="scrollHint"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M11 2v20M4 15l7 7 7-7" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </section>
+    <section class="research page-width" id="research" tabindex="-1" aria-labelledby="research-title"><div class="research-heading"><h2 id="research-title" data-i18n="selectedResearch">{{t.selectedResearch}}</h2></div><div id="research-list">{{research}}</div></section>
+    <section class="publications section page-width" id="publications" tabindex="-1" aria-labelledby="papers-title"><div class="section-heading reveal"><h2 class="section-title" id="papers-title" data-i18n="navPapers">{{t.navPapers}}</h2><div id="scholar-slot" class="scholar-slot">{{scholar}}</div></div><div class="publication-controls"><div class="filter-group" data-enhancement hidden role="group" aria-label="Filter publications"><button class="filter active" data-filter="all" aria-pressed="true" data-i18n="filterAll">{{t.filterAll}}</button><button class="filter" data-filter="first" aria-pressed="false" data-i18n="filterFirst">{{t.filterFirst}}</button></div><p id="publication-count" class="publication-count" aria-live="polite">{{publicationCount}}</p></div><div id="publication-list">{{publications}}</div></section>
+    <section class="about quiet-section page-width" id="about" tabindex="-1" aria-labelledby="about-title"><h2 id="about-title" class="quiet-title reveal" data-i18n="navAbout">{{t.navAbout}}</h2><div class="about-details"><p class="about-status reveal" data-i18n="aboutStatus">{{t.aboutStatus}}</p><p class="about-copy reveal" data-i18n="aboutBio">{{t.aboutBio}}</p></div></section>
+    <section class="education quiet-section page-width" id="education" tabindex="-1" aria-labelledby="education-title"><h2 class="quiet-title reveal" id="education-title" data-i18n="navEducation">{{t.navEducation}}</h2><div class="education-list" id="education-list">{{education}}</div></section>
+    <section class="contact-section quiet-section page-width" id="contact" tabindex="-1" aria-labelledby="contact-title"><h2 class="quiet-title reveal" id="contact-title" data-i18n="navContact">{{t.navContact}}</h2><div class="contact-links reveal" id="contact-links">{{contact}}</div></section>
+  </main><footer class="page-width site-footer"><span>© <span id="year">2026</span> <span data-profile="name">{{meta.name}}</span></span><a href="#top" data-i18n="backTop">{{t.backTop}}</a></footer>
+</body>
+</html>

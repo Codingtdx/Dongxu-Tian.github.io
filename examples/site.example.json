@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "profile": {
+    "name": {
+      "en": "Your Name",
+      "zh": "你的姓名"
+    },
+    "pageTitle": {
+      "en": "Your Name | Research",
+      "zh": "你的姓名 | 研究主页"
+    },
+    "description": {
+      "en": "An academic homepage. Replace this with a factual description.",
+      "zh": "学术个人主页。请改为与你的经历相符的简介。"
+    },
+    "role": {
+      "en": "Researcher",
+      "zh": "研究人员"
+    },
+    "institution": {
+      "en": "Your institution",
+      "zh": "你的单位"
+    },
+    "status": {
+      "en": "Your current position and start date.",
+      "zh": "你的现任身份与开始时间。"
+    },
+    "bio": {
+      "en": "Describe your research interests in a short paragraph.",
+      "zh": "用一小段文字介绍你的研究兴趣。"
+    },
+    "heroLines": {
+      "en": [
+        "Your research focus",
+        "One concise research ambition."
+      ],
+      "zh": [
+        "你的研究方向",
+        "一句简短的研究愿景。"
+      ]
+    }
+  },
+  "labels": {
+    "en": {
+      "fullResolution": "Open original figure ↗",
+      "skip": "Skip to content",
+      "navAbout": "About",
+      "navResearch": "Research",
+      "navPapers": "Publications",
+      "navEducation": "Education",
+      "navContact": "Contact",
+      "explore": "Explore research",
+      "filterAll": "All publications",
+      "filterFirst": "First author",
+      "current": "Current",
+      "backTop": "Back to top ↑",
+      "firstAuthor": "First author",
+      "ongoing": "Ongoing research",
+      "viewFigure": "Enlarge figure",
+      "close": "Close figure",
+      "figureNote": "Original research figure · press Esc to close",
+      "menuOpen": "Open navigation",
+      "menuClose": "Close navigation",
+      "allLabel": "Filter publications",
+      "selectedResearch": "Research directions",
+      "paper": "Paper",
+      "scrollHint": "Scroll to research"
+    },
+    "zh": {
+      "fullResolution": "查看原始图片 ↗",
+      "skip": "跳转到正文",
+      "navAbout": "关于我",
+      "navResearch": "研究方向",
+      "navPapers": "发表论文",
+      "navEducation": "教育经历",
+      "navContact": "联系",
+      "explore": "探索研究",
+      "filterAll": "全部论文",
+      "filterFirst": "第一作者",
+      "current": "在读",
+      "backTop": "回到顶部 ↑",
+      "firstAuthor": "第一作者",
+      "ongoing": "进行中",
+      "viewFigure": "放大研究图",
+      "close": "关闭图片",
+      "figureNote": "原始研究图 · 按 Esc 关闭",
+      "menuOpen": "打开导航",
+      "menuClose": "关闭导航",
+      "allLabel": "筛选论文",
+      "selectedResearch": "研究方向",
+      "paper": "论文",
+      "scrollHint": "向下浏览研究"
+    }
+  },
+  "research": [
+    {
+      "id": "example-direction",
+      "en": {
+        "title": "A research direction",
+        "summary": "Describe one contribution you made, using evidence-based language."
+      },
+      "zh": {
+        "title": "一个研究方向",
+        "summary": "用一句有依据的话说明你本人完成的贡献。"
+      }
+    }
+  ],
+  "publications": [
+    {
+      "id": "example-paper",
+      "year": 2026,
+      "title": "Example publication title — replace with your actual paper",
+      "authors": [
+        "Your Name"
+      ],
+      "journal": "Example journal",
+      "details": "Volume, pages or article number",
+      "first": true
+    }
+  ],
+  "education": [
+    {
+      "id": "example-education",
+      "date": {
+        "en": "START — PRESENT",
+        "zh": "开始时间 — 至今"
+      },
+      "degree": {
+        "en": "Your degree or current program",
+        "zh": "你的学位或在读项目"
+      },
+      "school": {
+        "en": "Your institution",
+        "zh": "你的单位"
+      },
+      "current": true
+    }
+  ],
+  "contact": {
+    "email": "your.name@example.com",
+    "links": [
+      {
+        "id": "example-link",
+        "label": {
+          "en": "Your profile",
+          "zh": "个人资料"
+        },
+        "url": "https://example.com"
+      }
+    ]
+  }
+}

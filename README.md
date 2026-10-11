@@ -1,101 +1,86 @@
-# Academic Pages
-**Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
+# Dongxu Tian 学术主页
 
-![Academic Pages template example](images/themes/homepage-light.png "Academic Pages template example")
+这是现有学术主页的可填写、可继续扩展版本。使用原来的静态 HTML、CSS 和 JavaScript；不需要 CMS、后台或安装依赖。包内 `dist/` 已构建，可用于静态托管。构建只需要 Node.js 18 或更新版本。
 
-# Getting Started
+## 更新一次内容
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your public repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Edit site-wide configuration in `_config.yml` and double check that the `url` is the one that you just selected in the previous step and that `repository` reflects the correct path for your repository.
-1. Add your site content, upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+1. 用文本编辑器打开 `content/site.json`，填写或修改对应字段。
+2. 将自己的图片或 PDF 放入 `dist/assets/`，配置使用 `./assets/文件名`；路径相对于 `dist/`，不是相对于 JSON 文件。
+3. 在项目目录运行 `node scripts/build.mjs`。构建会先校验，再同时生成静态页面、浏览器配置和共享渲染文件。
+4. 在本地预览确认内容。需要预览服务时，可运行 `python3 -m http.server 8767 --directory dist`，然后打开 `http://127.0.0.1:8767/`。若已有预览服务，刷新对应页面即可。
 
-See more info at https://academicpages.github.io/
+只检查内容可运行 `node scripts/validate.mjs`。错误提示会指出具体字段和原因，如 `research[0].zh.summary` 漏填、ID 重复或本地图片不存在。外部 URL 仅校验格式，不检测远站是否存活。校验失败不会写入新的构建结果。
 
-### Additional Tutorials
+`dist/index.html`、`dist/content.js`、`dist/renderer.js` 是生成文件，**不要手动同步**。布局源在 `src/index.template.html`，共享内容渲染在 `src/renderer.js`；外观和交互分别在 `dist/style.css`、`dist/app.js`。编辑 JSON 只改内容，通常无需修改这些文件。
 
-Additional tutorials for working with the Academic Pages template can be found at the following sites:
-- https://jayrobwilliams.com/posts/2020/06/academic-website/
+## 字段说明
 
-## Running locally
+双语字段使用 `{"en":"English text","zh":"中文文本"}`。两种语言都要填写；普通内容是纯文本，不填 HTML。JSON 不支持注释，不要留下末尾多余逗号。可选字段可以整项省略，或从对象中删除；不要用空字符串或 `null` 代替。
 
-When you are initially working on your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+| 区域 | 填写字段 | 说明 |
+| --- | --- | --- |
+| `profile` | `name`、`pageTitle`、`description`、`role`、`institution`、`status`、`bio` | 必填双语；姓名、页面标题、搜索简介、身份、单位、现状与简介。英文姓名用于突出论文作者列表中的本人。 |
+| `profile.heroLines` | `en` 与 `zh` 文本数组 | 必填，至少一行；每项是一行主张，建议保持简短。当前网站只保留这一处研究愿景。内容较高时首屏会自然撑高。 |
+| `profile` 可选 | `socialDescription`、`topics` | 分享摘要为双语；未填时使用简介。`topics` 为文字数组，仅供结构化资料使用。 |
+| `labels` | `en` / `zh` 中现有界面文字 | 默认可保留；修改时保持双语键完整。含导航、筛选、图片弹窗与箭头的无障碍名称。 |
+| `research` | 研究对象数组 | 可以增删、重排；不依赖四项。见下面示例。 |
+| `publications` | 论文对象数组 | 可以增删、重排；不依赖五篇。见下面示例。 |
+| `education` | 教育对象数组 | 每项 `id`、双语 `date` / `degree` / `school` 必填；`current:true` 可选。 |
+| `contact` | 可选 `email`、`scholar`、`links` | 没有的字段可删除；`scholar` 只展示在论文区。联系方式展示在结尾。 |
 
-1. Clone the repository and made updates as detailed above.
+每个研究、论文、教育、联系链接对象的 `id` 应在所在数组中唯一，以小写字母开头，只用字母、数字、连字符，例如 `polymer-foam`。编号由顺序自动生成，第十项显示 `10`。图片文件名不必与 ID 相同。
 
-### Using a different IDE
-1. Make sure you have ruby-dev, bundler, and nodejs installed
-    
-    On most Linux distributions and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
-    ```bash
-    sudo apt install ruby-dev ruby-bundler nodejs
-    ```
-    If you see error `Unable to locate package ruby-bundler`, `Unable to locate package nodejs `, run the following:
-    ```bash
-    sudo apt update && sudo apt upgrade -y
-    ```
-    then try running `sudo apt install ruby-dev ruby-bundler nodejs` again.
+### 研究对象
 
-    On MacOS the commands are:
-    ```bash
-    brew install ruby
-    brew install node
-    gem install bundler
-    ```
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
+最少只需 `id`、`en.title` / `en.summary` 与 `zh.title` / `zh.summary`。每个 summary 用一句话写本人贡献。下面展示含图片的形式；**示例图片路径须替换为真实文件**。
 
-    If you see file permission error like `Fetching bundler-2.6.3.gem ERROR:  While executing gem (Gem::FilePermissionError) You don't have write permissions for the /var/lib/gems/3.2.0 directory.` or `Bundler::PermissionError: There was an error while trying to write to /usr/local/bin.`
-    Install Gems Locally (Recommended):
-    ```bash
-    bundle config set --local path 'vendor/bundle'
-    ```
-    then try run `bundle install` again. If succeeded, you should see a folder called `vendor` and `.bundle`.
-
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change to Markdown (*.md) and HTML files, while changes to the core template and configuration (i.e., `_config.yml`) will require stopping and restarting Jekyll.
-    You may also try `bundle exec jekyll serve -l -H localhost` to ensure jekyll to use specific dependencies on your own local machine.
-
-If you are running on Linux it may be necessary to install some additional dependencies prior to being able to run locally: `sudo apt install build-essential gcc make`
-
-## Using Docker
-
-Working from a different OS, or just want to avoid installing dependencies? You can use the provided `Dockerfile` to build a container that will run the site for you if you have [Docker](https://www.docker.com/) installed.
-
-You can build and execute the container by running the following command in the repository:
-
-```bash
-chmod -R 777 .
-docker compose up
+```json
+{
+  "id": "my-project",
+  "layout": "wide",
+  "ongoing": true,
+  "en": {"title":"A research direction","summary":"One contribution I made.","alt":"Describe the actual figure."},
+  "zh": {"title":"一个研究方向","summary":"一句本人贡献。","alt":"描述实际图片内容。"},
+  "figure": {"preview":"./assets/my-preview.webp","original":"./assets/my-original.png","width":1800,"height":1239},
+  "paper": "10.1234/example"
+}
 ```
 
-You should now be able to access the website from `localhost:4000`.
+`layout` 可选 `wide`、`detail`、`routes` 或 `landscape`，缺省为 `wide`。`ongoing` 可省略。`figure` 整体可省略，研究会以文字展示；有图时双语 `alt` 和预览图真实像素 `width` / `height` 必填，以保持比例与加载稳定。`original` 可省略，放大后的原图入口会回退到 `preview`。预览路径和原图路径都可自定义，放大弹窗也使用这些路径。请勿裁切图内坐标、标尺或标签来适应页面。
 
-### Using the DevContainer in VS Code
+`paper` 是可选 DOI，不含 `https://doi.org/`。没有 DOI 但有资料链接时可用可选 `url`；同时填两者时优先 DOI。两者都没有就不显示论文入口。本地资料用 `./assets/paper.pdf`，外部链接用完整 `https://...`；配置的本地文件必须存在。
 
-If you are using [Visual Studio Code](https://code.visualstudio.com/) you can use the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) that comes with this Repository. Normally VS Code detects that a development container configuration is available and asks you if you want to use the container. If this doesn't happen you can manually start the container by **F1->DevContainer: Reopen in Container**. This restarts your VS Code in the container and automatically hosts your academic page locally on http://localhost:4000. All changes will be updated live to that page after a few seconds.
+### 论文对象
 
-# Maintenance
+```json
+{
+  "id": "my-paper",
+  "year": 2026,
+  "title": "Actual published title",
+  "authors": ["Your Name", "Another Author"],
+  "journal": "Journal name",
+  "details": "Volume, pages or article number",
+  "doi": "10.1234/example",
+  "first": true
+}
+```
 
-Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
+`id`、四位整数 `year` 和 `title` 必填。标题可用正式论文原文字符串，或完整双语对象。`authors`、`journal`、`details`、`doi`、`url` 和 `first` 都可省略；缺少的信息正常隐藏，不会生成 `undefined`。`journal` / `details` 也支持原文字符串或双语对象。没有 DOI 时可填资料 `url`；无链接则标题为普通文本。`first:true` 表示本人第一作者，用于筛选。相同 DOI 不应重复录入。
 
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii), and additional maintainers would be welcome.
+### 教育与联系方式
 
-## Bugfixes and enhancements
+教育每项示例：`{"id":"phd","date":{"en":"2025 — PRESENT","zh":"2025 — 至今"},"degree":{"en":"PhD student","zh":"博士研究生"},"school":{"en":"Your university","zh":"你的学校"},"current":true}`。
 
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of the template to your fork as well.
+联系 `links` 的每项为 `{"id":"github","label":{"en":"GitHub","zh":"GitHub"},"url":"https://github.com/your-account"}`。`scholar` 使用相同的 `label` 与 `url`，不需要 `id`。`email` 只填邮箱，不加 `mailto:`。
 
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize, although [rebasing](https://git-scm.com/docs/git-rebase) the changes from this template will work along with manually [cherry picking](https://git-scm.com/docs/git-cherry-pick) the relevant commits. If you are not comfortable with the Git command line, you can save your various `.yml` configuration files and Markdown files, delete the repository, and fork it again. 
+## 从通用示例开始
 
----
-<div align="center">
-    
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
-[![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/academicpages/academicpages.github.io?color=blue)](https://github.com/academicpages/academicpages.github.io/blob/master/LICENSE)
+`examples/site.example.json` 是独立通用示例，不含伪造的个人研究结果；其中研究省略图片，论文省略 DOI，用来演示可选字段。可先在**项目副本**里把它复制为 `content/site.json` 再构建，随后填写真实资料和图片。原项目的 Dongxu Tian 正式配置保持独立。
 
-[![GitHub stars](https://img.shields.io/github/stars/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io)
-[![GitHub forks](https://img.shields.io/github/forks/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/fork)
-</div>
+仅验证示例、不替换正式内容：`node scripts/validate.mjs --content examples/site.example.json`。构建示例可用 `node scripts/build.mjs --content examples/site.example.json --out-dir ../homepage-example-preview`；它生成一个独立、带运行资源的静态目录，正式 `dist/` 保持不变。替代内容必须指定独立输出目录，否则构建会拒绝覆盖正式页面。配置中的本地文件仍从本项目 `dist/` 读取并复制到独立输出。
+
+## 部署与许可
+
+本轮交付是本地项目包，不包含自动推送或部署。将构建后的 `dist/` 发布到静态托管即可，保留相对路径和 `.nojekyll`；未来更新同样先编辑 JSON、构建、预览，再发布。
+
+`dist/assets/arrow-right.svg` 使用 Phosphor Icons，原有 MIT 许可位于 `dist/assets/phosphor-LICENSE.txt`，需随图标保留。科研图和个人学术资料仍属于原作者；本项目没有为它们额外赋予开放再使用许可。
